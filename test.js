@@ -16,14 +16,32 @@ function nodeWithContent(str, startRE, stopRE, cb) {
             nextStop = str.substring(++indexStop).match(stopRE);
         if (nextStart) {
             index += nextStart.index;
+            if(!nextStop) break;
             indexStop += nextStop.index + 1;
-        }
-        if (!nextStart) break;
+        } else break;
     }
+
     cb(indexStart, indexStop);
 }
 
+function nodeVoidContent() {
+
+}
+
 nodeWithContent(h, /<\w/, /<\/\w/, function(a, b) {
-    console.log();
+    console.log(a, b);
+    console.log(h.substring(a, h.indexOf('>', b) + 1));
+});
+
+nodeWithContent(h, /<\w/, /<\/\w/, function(a, b) {
+    var hh = h.substring(a, h.indexOf('>', b) + 1);
+    var hhci = h.indexOf('>', a) + 1;
+
+    console.log('TAG: ', h.substring(a, hhci));
+    console.log('CONTENT: ', h.substring(hhci, b - 2));
+});
+
+nodeWithContent(h, /<\w/, /\/>/, function(a, b) {
+    console.log(a, b);
     console.log(h.substring(a, h.indexOf('>', b) + 1));
 });
