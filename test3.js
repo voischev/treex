@@ -40,17 +40,17 @@ function parser(html) {
         content,
         chr,
         makeContent = function(str) {
+            var i = str.length;
+
             if(str.charAt(0) === '<')
                 return [[str]];
 
-            var len = str.length,
-                i;
-
-            for (i = len; i > 0; i--) {
+            while (--i > 0) {
+                // TODO: need more checks
                 if (str[i] === '<') break;
             }
 
-            return [[str.substring(0, i)], [str.substring(i, len)]];
+            return [[str.substring(0, i)], [str.substring(i), []]];
         },
         lastNode = function(arr) {
             var len = arr.length;
