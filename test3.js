@@ -1,34 +1,3 @@
-/*
- * NODES:
- *      TEXT
- *      ['text']
- *
- *      ELEMENT
- *      ['<tag attrs>', [...content]]
- *
- *      VOID ELEMENT
- *      ['<tag attrs>', []]
- *
- * TREE:
- *      [
- *          ['<!doctype>'],
- *          ['<html>', [
- *              ['<head>', [
- *                  ['<meta type="urf8">', []],
- *                  ['<title>', [['title']]],
- *                  ['<style src="ololo.css">', []]
- *              ]]
- *          ]],
- *          ['<body class="page">', [
- *              ['<div class="main">', [
- *                  ['<h1>', [['TITLE']]],
- *                  ['<p>', [['test']]],
- *                  ['<img src="image.png">', []]
- *              ]]
- *          ]]
- *      ]
- */
-
 var html = 'text<h1><h2>text text<h3>text</h3></h2><img /><h2><h3><h4></h4><h4><h5></h5></h4></h3></h2></h1>';
 
 function parser(html) {
@@ -39,17 +8,30 @@ function parser(html) {
         lastCotnent,
         content,
         chr,
+        isText = function(str) {
+            // Check all case for text nodes
+            if (str.charAt(0) !== '<') return true;
+
+            // is condition for tests :) need more tests
+            if(str.charAt(1) === '!') {
+                return true;
+            }
+
+            return false;
+        },
         makeContent = function(str) {
             var i = str.length;
 
             if(str.charAt(0) === '<')
-                return [[str]];
+                // is Element or Text?
+                return [[str, []]];
 
             while (--i > 0) {
-                // TODO: need more checks
+                // TODO: need more checks. Is Element or Text
                 if (str[i] === '<') break;
             }
 
+            // is Text + Element
             return [[str.substring(0, i)], [str.substring(i), []]];
         },
         lastNode = function(arr) {
@@ -70,22 +52,23 @@ function parser(html) {
 
             if (content.length === 1) {
                 if(content[0][0].charAt(1) === '/') {
-                    lastNode(stack).push(content);
+                    lastNode(stack)[1].concat(content);
+                    console.log('SSSSSSSSSSS', lastNode(stack));
                     continue;
                 }
             }
             if (content.length === 2) {
                 if(content[1][0].charAt(1) === '/') {
-                    lastNode(stack).push(content);
+                    lastNode(stack)[1].concat(content);
                     continue;
                 }
             }
             stack.push(content);
-            console.log('stack', JSON.stringify(stack));
         }
 
     }
 
+    console.log('stack: ', JSON.stringify(stack));
     return result;
 }
 

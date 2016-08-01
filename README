@@ -1,0 +1,30 @@
+/*
+ * NODES:
+ *      TEXT
+ *      ['text']
+ *
+ *      ELEMENT
+ *      ['<tag attrs>', [...content]]
+ *
+ *      VOID ELEMENT
+ *      ['<tag attrs>', []]
+ *
+ * TREE:
+ *      [
+ *          ['<!doctype>'],
+ *          ['<html>', [
+ *              ['<head>', [
+ *                  ['<meta type="urf8">', []],
+ *                  ['<title>', [['title']]],
+ *                  ['<style src="ololo.css">', []]
+ *              ]]
+ *          ]],
+ *          ['<body class="page">', [
+ *              ['<div class="main">', [
+ *                  ['<h1>', [['TITLE']]],
+ *                  ['<p>', [['test']]],
+ *                  ['<img src="image.png">', []]
+ *              ]]
+ *          ]]
+ *      ]
+ */
