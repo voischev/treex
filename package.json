@@ -1,0 +1,31 @@
+{
+  "name": "treex",
+  "version": "0.0.0",
+  "description": "Treex – HTML/XML parser",
+  "main": "lib/treex.js",
+  "directories": {
+    "test": "test"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "mocha": "^3.0.0"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/voischev/treex.git"
+  },
+  "keywords": [
+    "parser",
+    "html",
+    "xml"
+  ],
+  "author": "Ivan Voischev <voischev-ivan@ya.ru>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/voischev/treex/issues"
+  },
+  "homepage": "https://github.com/voischev/treex#readme"
+}
