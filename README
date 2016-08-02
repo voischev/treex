@@ -4,7 +4,7 @@
  *      ['text']
  *
  *      ELEMENT
- *      ['<tag attrs>', [...content]]
+ *      ['<tag attrs>', [...content], '</tag>']
  *
  *      VOID ELEMENT
  *      ['<tag attrs>', []]
@@ -15,16 +15,16 @@
  *          ['<html>', [
  *              ['<head>', [
  *                  ['<meta type="urf8">', []],
- *                  ['<title>', [['title']]],
+ *                  ['<title>', [['title']], '</title>'],
  *                  ['<style src="ololo.css">', []]
- *              ]]
- *          ]],
- *          ['<body class="page">', [
- *              ['<div class="main">', [
- *                  ['<h1>', [['TITLE']]],
- *                  ['<p>', [['test']]],
- *                  ['<img src="image.png">', []]
- *              ]]
- *          ]]
+ *              ], '</head>']
+ *              ['<body class="page">', [
+ *                  ['<div class="main">', [
+ *                      ['<h1>', [['TITLE']], '</h1>'],
+ *                      ['<p>', [['test']], '</p>'],
+ *                      ['<img src="image.png">', []]
+ *                  ]]
+ *              ], '</body>']
+ *          ], '</html>'],
  *      ]
  */
