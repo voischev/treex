@@ -6,25 +6,25 @@ var assert = require('assert'),
 describe('Simple', function() {
     describe('Text', function() {
         it('should return text node', function() {
-            assert.equal(['test'], treex('test'));
+            assert.deepEqual([['test']], treex('test'));
         });
     });
 
     describe('Element', function() {
         it('should return element node', function() {
-            assert.equal(['<span>', [], '</span>'], treex('<span></span>'));
+            assert.deepEqual([['<span>', [], '</span>']], treex('<span></span>'));
         });
     });
 });
 
-describe('Declarations', function() {
-    describe('Doctype HTML5', function() {
+describe('Conditions', function() {
+    describe('Doctype Simple', function() {
         it('should return text node', function() {
-            assert.equal(['<!DOCTYPE HTML>'], treex('<!DOCTYPE HTML>'));
+            assert.deepEqual([['<!DOCTYPE HTML>']], treex('<!DOCTYPE HTML>'));
         });
     });
 
-    describe('Doctype XHTML + MathML + SVG Profile (Using SVG as the host)', function() {
+    describe('Doctype Other', function() {
         it('should return text node', function() {
             var text = [
                 '<!DOCTYPE svg:svg PUBLIC',
@@ -32,7 +32,7 @@ describe('Declarations', function() {
                 '"http://www.w3.org/2002/04/xhtml-math-svg/xhtml-math-svg.dtd">'
             ].join('\n');
 
-            assert.equal([text], treex(text));
+            assert.deedEqual([[text]], treex(text));
         });
     });
 });
