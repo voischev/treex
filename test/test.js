@@ -56,22 +56,42 @@ describe('Simple', function() {
 
 describe('Special case', function() {
     describe('<p>.*<p>', function() {
-        it('should return void element node for', function() {
+        it('should return void element node', function() {
             assert.deepEqual([
-                    ['<p>', [['test1']]],
-                    ['<p>', [],
-                    ['<p>', [['test3']]]
-                    ], treex('<p>test1<p><p>test3'));
+                ['<p>', [['test1']]],
+                ['<p>', []],
+                ['<p>', [['test3']]]
+            ], treex('<p>test1<p><p>test3'));
         });
     });
 
     describe('<p>.*</p>', function() {
-        it('should return element node for <p></p>', function() {
+        it('should return element node', function() {
             assert.deepEqual([
-                    ['<p>', [['test1']], '</p>'],
-                    ['<p>', [], '</p>'],
-                    ['<p>', [['test3']], '</p>']
+                ['<p>', [['test1']], '</p>'],
+                ['<p>', [], '</p>'],
+                ['<p>', [['test3']], '</p>']
             ], treex('<p>test1</p><p></p><p>test3</p>'));
+        });
+    });
+
+    describe('<p>.*<span>', function() {
+        it('should return void element node and inline element in content', function() {
+            assert.deepEqual([
+                ['<p>', [
+                    ['test1'],
+                    ['<span>', [['test2']], '</span>']
+                ]]
+            ], treex('<p>test1<span>test2</span>'));
+        });
+    });
+
+    describe('<p>.*<div>', function() {
+        it('should return void element node and block element', function() {
+            assert.deepEqual([
+                ['<p>', [['test1']],
+                ['<div>', [['test2']], '</div>']]
+            ], treex('<p>test1<div>test2</div>'));
         });
     });
 });
