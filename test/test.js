@@ -32,7 +32,7 @@ describe('Conditions', function() {
                 '"http://www.w3.org/2002/04/xhtml-math-svg/xhtml-math-svg.dtd">'
             ].join('\n');
 
-            assert.deedEqual([[text]], treex(text));
+            assert.deepEqual([[text]], treex(text));
         });
     });
 
