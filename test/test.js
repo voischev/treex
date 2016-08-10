@@ -10,14 +10,6 @@ describe('Simple', function() {
         });
     });
 
-    describe('Element', function() {
-        it('should return element node', function() {
-            assert.deepEqual([['<span>', [], '</span>']], treex('<span></span>'));
-        });
-    });
-});
-
-describe('Conditions', function() {
     describe('Doctype Simple', function() {
         it('should return text node', function() {
             assert.deepEqual([['<!DOCTYPE HTML>']], treex('<!DOCTYPE HTML>'));
@@ -44,4 +36,43 @@ describe('Conditions', function() {
             );
         });
     });
+
+    describe('Void Element', function() {
+        it('should return void element node (HTML)', function() {
+            assert.deepEqual([['<meta>', []]], treex('<meta>'));
+        });
+
+        it('should return void element node (XHTML)', function() {
+            assert.deepEqual([['<meta />', []]], treex('<meta />'));
+        });
+    });
+
+    describe('Element', function() {
+        it('should return element node', function() {
+            assert.deepEqual([['<span>', [], '</span>']], treex('<span></span>'));
+        });
+    });
 });
+
+describe('Special case', function() {
+    describe('<p>.*<p>', function() {
+        it('should return void element node for', function() {
+            assert.deepEqual([
+                    ['<p>', [['test1']]],
+                    ['<p>', [],
+                    ['<p>', [['test3']]]
+                    ], treex('<p>test1<p><p>test3'));
+        });
+    });
+
+    describe('<p>.*</p>', function() {
+        it('should return element node for <p></p>', function() {
+            assert.deepEqual([
+                    ['<p>', [['test1']], '</p>'],
+                    ['<p>', [], '</p>'],
+                    ['<p>', [['test3']], '</p>']
+            ], treex('<p>test1</p><p></p><p>test3</p>'));
+        });
+    });
+});
+
