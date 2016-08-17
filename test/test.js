@@ -96,3 +96,13 @@ describe('Special case', function() {
     });
 });
 
+describe('Attrs', function() {
+    describe('<div class="class">', function() {
+        it('should return element node with attrs', function() {
+            assert.deepEqual([
+                ['<div class="class">', [], '</div>']
+            ], treex('<div class="class"></div>'));
+        });
+    });
+});
+
